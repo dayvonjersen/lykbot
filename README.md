@@ -18,6 +18,7 @@ that's pretty much it.
 
 #### required things
 requires some gems
+
 `gem install cinch simple-rss json time-lord`
 
 if you get ruby version errors, good luck
