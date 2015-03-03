@@ -103,26 +103,27 @@ $admin = "lykranian"
 
   #might refresh the rss feed list without having to restart the bot
   #need to add a check to make sure it doesn't do anything while updates are being checked for above
-  on :message, ".rss23load" do |m|
-    $feed_link = YAML.load File.open('feed_link.yml', 'r')
-    length = $feed_link.length - 1
-    $old = Array.new($feed_link.length, "empty")
-    for i in 0..length
-      $old[i] = get_first_title($feed_link[i])
-      sleep(1)
+  on :message, ".rss load" do |m|
+    if m.user.nick == admin
+      $feed_link = YAML.load File.open('feed_link.yml', 'r')
+      length = $feed_link.length - 1
+      $old = Array.new($feed_link.length, "empty")
+      for i in 0..length
+        $old[i] = get_first_title($feed_link[i])
+        sleep(1)
+      end
     end
   end
 
   #sends queries to nyaa
-  on :message, ".rss23load" do |m|
-    $feed_link = YAML.load File.open('feed_link.yml', 'r')
-    length = $feed_link.length - 1
-    $old = Array.new($feed_link.length, "empty")
-    for i in 0..length
-      $old[i] = get_first_title($feed_link[i])
-      sleep(1)
-    end
+  on :message, /^\.nyaa (.+)/ do |m, query|
+    pquery = query.gsub(/\s/,'+')
+    link_rss = "http://www.nyaa.se/?page=rss&cats=1_37&filter=1&term==%s" % [ pquery ]
+    feed = SimpleRSS.parse(open(link_rss))
+    m.reply "first result - #{feed.items.first.title}"
+    m.reply "http://www.nyaa.se/?term=#{pquery}"
   end
+  
 
   #you have mail
   #to do: make un-shitty
