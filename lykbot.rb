@@ -19,9 +19,8 @@ bot = Cinch::Bot.new do
 version = "1.0.0"
 
 #set which channels get rss udates
-$rss_chans = ["#peensquad",
-              "#xyz",
-              "#moogimob"]
+$rss_chans = ["#channel1",
+              "#channel2"]
 
 #set a nick as an admin
 $admin = "lykranian"
@@ -46,11 +45,10 @@ $admin = "lykranian"
   on :message, /^\.part (.+)/ do |m, channel|
     if "#{m.user.nick}" == "lykranian"
       Channel(channel).part
-      User("lykranian").send "part from #{channel} successful"
     end
   end
 
-#example of rss parsing
+  #example of rss parsing
   on :message, ".irssi" do |m|
     rss = SimpleRSS.parse open('https://github.com/irssi/irssi/releases.atom')
     m.reply "latest release - #{rss.items.first.title}"
@@ -219,8 +217,6 @@ $admin = "lykranian"
   end
   
   #slightly changed google search from cpt_yossarian's yossarian-bot
-  #https://github.com/woodruffw/yossarian-bot
-  #'Copyright (c) 2015 William Woodruff <william @ tuffbizz.com>' licenses are scary
   helpers do
     def google(m, search)
       url = URI.encode("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&rsz=large&safe=active&q=#{search}&max-results=1&v=2&prettyprint=false&alt=json")
@@ -245,5 +241,4 @@ $admin = "lykranian"
   end
 
 end
-
 bot.start
