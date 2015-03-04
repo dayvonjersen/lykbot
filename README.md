@@ -23,7 +23,9 @@ requires some gems
 
 if you get ruby version errors, good luck
 
-you also need some files in the bot directory.
+you also need some files in the directory that you run the ruby command from.
+
+it'd be best to keep them in the bot directory, and always launch the bot from there.
 
 ```
 feed_link.yml
