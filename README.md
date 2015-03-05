@@ -25,7 +25,11 @@ if you get ruby version errors, good luck
 
 you also need some files in the directory that you run the ruby command from.
 
-it'd be best to keep them in the bot directory, and always launch the bot from there.
+it'd be best to keep them in the bot directory, and always launch the bot from there. make an alias to do it for you.
+
+`alias lykbot='cd ~/lykbot && screen -d ruby lykbot.rb && cd $OLDPWD'` should work probably
+
+files needed:
 
 ```
 feed_link.yml
