@@ -237,7 +237,7 @@ $admin = "lykranian"
       end
     end
   end
-  on :message, /^.g (.+)/ do |m, query|
+  on :message, /^\.g (.+)/ do |m, query|
     google(m, query)
   end
 
@@ -245,5 +245,10 @@ $admin = "lykranian"
     m.reply ".idle"
   end
 
+  # source function for Flygon
+  on :message, /^\.(source|src|git|github).*/ do |m, type|
+    m.reply "https://github.com/lykranian/lykbot"
+  end
+  
 end
 bot.start
